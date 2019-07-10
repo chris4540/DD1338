@@ -23,16 +23,17 @@ class selectionSortExample {
 		// get the length
 		int n = lst.length;
 		for (int i = 0; i < n; i++) {
-			int index = 0;
-			int smallest = lst[i];
+			int index = 0;  // index to mark sorted part
+			int smallest = lst[i];  // smallest value of the unsorted part
 			for (int j = i; j < n; j++) {
 				if (lst[j] < smallest) {
 					smallest = lst[j];
 					index = j;
 				}
-			int temp = lst[i];
-			lst[i] = smallest;
-			lst[index] = temp;
+				// do swapping
+				int temp = lst[i];
+				lst[i] = smallest;
+				lst[index] = temp;
 		 	}
 	   }
 
