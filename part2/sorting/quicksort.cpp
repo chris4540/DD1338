@@ -4,16 +4,31 @@
 using namespace std;
 
 vector<string> getStringArr(){
-    vector<string> ret{"Blue", "Red", "Orange", "Yellow"};
+    // vector<string> ret{"Blue", "Red", "Orange", "Yellow"};
+    vector<string> ret{"S", "O","R","T","E","X","A","M","P","L","E"};
     return ret;
 }
 
-int main(){
+void sort(vector<string>& vec, int lo, int hi){
+    return;
+}
 
+int partition(){
+    return 1;
+}
+
+
+
+int main(){
     // Initialize String Array
-    vector<string> colour = getStringArr();
+    vector<string> array = getStringArr();
 
     // Print Strings
-    for (int i = 0; i < 4; i++)
-        cout << colour[i] << "\n";
+    for (string s: array){
+        cout << s;
+        cout << ",";
+    }
+    cout << endl;
+
+    return 0;
 }
