@@ -1,6 +1,7 @@
-// The another implementation in C+=
+// The another implementation in C++
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 vector<string> getStringArr(){
@@ -12,33 +13,11 @@ vector<string> getStringArr(){
     return ret;
 }
 
-int partition(vector<string>& vec, int lo, int hi){
-    return 1;
-}
-
-// quick sort implementation
-void qsort(vector<string>& vec, int lo, int hi){
-    if (hi <= lo){
-        return;
-    }
-    int pivot = partition(vec, lo, hi);
-    qsort(vec, lo, pivot-1);
-    qsort(vec, pivot+1, hi);
-}
-
-void sort(vector<string>& vec){
-    // shuffe the array to aviod going to worse case (O(n^2))
-    //
-
-    // sort the input array
-    qsort(vec, 0, vec.size() - 1);
-}
-
 template <typename T>
 void printVec(vector<T>& vec){
     int size = vec.size();
     cout << "[";
-    for (size_t i=0; i < size-2; ++i){
+    for (size_t i=0; i < size-1; ++i){
         T e = vec[i];
         cout << e;
         cout << ", ";
@@ -49,20 +28,53 @@ void printVec(vector<T>& vec){
     cout << endl;
 }
 
+int partition(vector<string>& vec, int lo, int hi){
+    // set iterators: left and right scan indices
+    int i = lo;
+    int j = hi + 1;
+    string v = vec[lo];  // the pivot or partition item
+
+    while(true){
+        // scan from left to end
+        while(vec[++i] < v) {
+            if (i == hi) break;
+        }
+        while(v < vec[--j]){
+            if (j == lo) break;
+        }
+        if (i >= j) break;
+        swap(vec[i], vec[j]);
+    }
+    // swap the pivot
+    swap(vec[lo], vec[j]);
+    return j;
+}
+
+// -----------------------------------
+// quick sort implementation
+// -----------------------------------
+void qsort(vector<string>& vec, int lo, int hi){
+    if (hi <= lo){
+        return;
+    }
+    int partIdx = partition(vec, lo, hi);
+    qsort(vec, lo, partIdx-1);
+    qsort(vec, partIdx+1, hi);
+}
+
+void sort(vector<string>& vec){
+    // shuffe the array to aviod going to worse case (O(n^2))
+    //
+
+    // sort the input array
+    qsort(vec, 0, vec.size() - 1);
+}
 
 int main(){
     // Initialize String Array
     vector<string> vector = getStringArr();
     printVec(vector);
-    // sort(array);
-
-
-    // // // Print Strings
-    // // for (string s: array){
-    // //     cout << s;
-    // //     cout << ",";
-    // // }
-    // // cout << endl;
-
+    sort(vector);
+    printVec(vector);
     return 0;
 }
