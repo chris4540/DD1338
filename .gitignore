@@ -24,3 +24,7 @@ hs_err_pid*
 
 # VS code excution json config
 .vscode
+
+# CPP
+*.o
+*.exe
