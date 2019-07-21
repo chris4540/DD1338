@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "utils.hpp"
 using namespace std;
 
 vector<string> getStringArr(){
@@ -11,21 +12,6 @@ vector<string> getStringArr(){
         "K","R","A","T","E","L","E","P","U","I","M","Q","C","X","O","S"
         };
     return ret;
-}
-
-template <typename T>
-void printVec(vector<T>& vec){
-    int size = vec.size();
-    cout << "[";
-    for (size_t i=0; i < size-1; ++i){
-        T e = vec[i];
-        cout << e;
-        cout << ", ";
-    }
-    // print the last element
-    cout << vec[size-1];
-    cout << "]";
-    cout << endl;
 }
 
 int partition(vector<string>& vec, int lo, int hi){
@@ -39,6 +25,7 @@ int partition(vector<string>& vec, int lo, int hi){
         while(vec[++i] < v) {
             if (i == hi) break;
         }
+        // scan from right to begin
         while(v < vec[--j]){
             if (j == lo) break;
         }

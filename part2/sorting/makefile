@@ -1,12 +1,22 @@
 .PHONY: all clean
 
 SRCS = $(wildcard *.cpp)
-OBJS = $(patsubst %.cpp,%.out,$(SRCS))
+EXES = $(patsubst %.cpp,%,$(SRCS))
+LIBS = ../lib/
+INCLUDE = -I$(LIBS)
+CXXFLAGS = $(INCLUDE)
+LIB_OBJS = utils.o
 
-all: $(OBJS)
+all: quicksort qsort
+
+quicksort: quicksort.o
+	$(CXX) -o $@ $(CXXFLAGS) $^
+
+qsort: qsort.o
+	$(CXX) -o $@ $(CXXFLAGS) $^
 
 clean:
-	rm -fv $(OBJS)
+	rm -fv $(EXES)
 
-%.out: %.cpp
-	$(CXX) $(CXXFLAGS) $^ -o $@
+%.o: %.cpp
+	$(CXX) -c $(CXXFLAGS) $^ -o $@
